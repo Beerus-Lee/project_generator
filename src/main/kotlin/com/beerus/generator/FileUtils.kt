@@ -1,6 +1,7 @@
 package com.beerus.generator
 
 import java.io.File
+import java.io.InputStream
 
 fun traverseFileTree() {
     val systemDir = File("src/template")
@@ -10,12 +11,20 @@ fun traverseFileTree() {
     }
 
     systemDir.copyRecursively(targetFile,true)
-    val fileTree: FileTreeWalk = targetFile.walk()
-    fileTree.filter { it.isFile }.forEach {
-        println(it.path)
+    val fileTree: FileTreeWalk = targetFile.walkTopDown()
+    fileTree.iterator().forEach {
+       //println(it.path)
 //        it.copyTo(File(it.path))
-    }
 
+        if(it.isFile) {
+            val inputStream: InputStream = File(it.path).inputStream()
+            val inputString = inputStream.bufferedReader().use { it.readText() }
+            //println(inputString)
+        }
+       if(it.isDirectory) {
+            println(it.name)
+        }
+    }
 }
 
 fun main(args: Array<String>) {
