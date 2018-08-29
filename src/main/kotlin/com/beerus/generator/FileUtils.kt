@@ -6,24 +6,23 @@ import java.io.InputStream
 fun traverseFileTree() {
     val systemDir = File("src/template")
     val targetFile = File("src/temp")
-    if (!targetFile.exists()) {
-        targetFile.mkdir()
-    }
-
-    systemDir.copyRecursively(targetFile,true)
-    val fileTree: FileTreeWalk = targetFile.walkTopDown()
+    val fileTree: FileTreeWalk = systemDir.walkTopDown()
     fileTree.iterator().forEach {
-       //println(it.path)
-//        it.copyTo(File(it.path))
-
+        println(it.name+"   "+it.path)
+        val targetDirectoryPath = it.path.replace("template","temp").replace("demo","beerus")
         if(it.isFile) {
             val inputStream: InputStream = File(it.path).inputStream()
             val inputString = inputStream.bufferedReader().use { it.readText() }
-            //println(inputString)
+            File(targetDirectoryPath).bufferedWriter().use{ out-> out.write(inputString) }
         }
+
        if(it.isDirectory) {
-            println(it.name)
+           val targetDir = File(targetDirectoryPath)
+            if(!targetDir.exists()) {
+                targetDir.mkdir()
+            }
         }
+
     }
 }
 
