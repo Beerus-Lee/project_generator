@@ -19,8 +19,8 @@ object ConfigUtils {
         return propertyMap
     }
 
-    fun getProperties(key: String?): String? {
-        return properties.get(key)
+    fun getProperties(key: String): String? {
+        return properties.get(key)?.replace("""/""","""\""")
     }
 
 

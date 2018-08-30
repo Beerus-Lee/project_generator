@@ -1,0 +1,8 @@
+rootProject.name = '${project_name}-${module_name}'
+include '${project_name}-${module_name}-server'
+include '${project_name}-${module_name}-domain'
+include '${project_name}-${module_name}-common'
+include '${project_name}-${module_name}-http'
+include '${project_name}-${module_name}-server:${project_name}-${module_name}-service'
+include '${project_name}-${module_name}-server:${project_name}-${module_name}-dao'
+include '${project_name}-${module_name}-server:${project_name}-${module_name}-api'
