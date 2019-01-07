@@ -20,7 +20,7 @@ object ConfigUtils {
     }
 
     fun getProperties(key: String): String? {
-        return properties.get(key)?.replace("""/""","""\""")
+        return properties.get(key)?.replace("""/""","""/""")
     }
 
 
