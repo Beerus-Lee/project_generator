@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="logging.path" value="${MATRIX_APPLOGS_DIR}"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder charset="UTF-8" class="com.lianjia.${project_name}.${module_name}.web.logger.HomeLogBackEncoder">
+            <pattern>%d %-5level %-5T [%X{SEQ_UUID}] %logger{36}.%method:%L -- %msg%n</pattern>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <appender name="ALL-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logging.path}/all.log</File>
+        <encoder charset="UTF-8" class="com.lianjia.${project_name}.${module_name}.web.logger.HomeLogBackEncoder">
+            <pattern>%d %-5level %-5T [%X{SEQ_UUID}] %logger{36}.%method:%L -- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logging.path}/all.%d{yyyyMMdd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <appender name="ERROR-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logging.path}/error.log</File>
+        <encoder charset="UTF-8" class="com.lianjia.${project_name}.${module_name}.web.logger.HomeLogBackEncoder">
+            <pattern>%d %-5level %-5T [%X{SEQ_UUID}] %logger{36}.%method:%L -- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logging.path}/error.%d{yyyyMMdd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+    <!--<appender name="DUBBO-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+    <!--<File>${logging.path}/dubbo.log</File>-->
+    <!--<encoder charset="UTF-8" class="com.lianjia.home.crm.web.logger.HomeLogBackEncoder">-->
+    <!--<pattern>%d %-5level %-5T %logger{36}.%method:%L &#45;&#45; %msg%n</pattern>-->
+    <!--</encoder>-->
+    <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+    <!--<FileNamePattern>${logging.path}/dubbo.%d{yyyyMMdd}.log</FileNamePattern>-->
+    <!--<maxHistory>30</maxHistory>-->
+    <!--</rollingPolicy>-->
+    <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+    <!--<level>INFO</level>-->
+    <!--</filter>-->
+    <!--</appender>
+-->
+
+    <appender name="SQL-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <File>${logging.path}/sql.log</File>
+        <encoder charset="UTF-8" class="com.lianjia.${project_name}.${module_name}.web.logger.HomeLogBackEncoder">
+            <pattern>%d %-5level %-5T %logger{36}.%method:%L -- %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${logging.path}/sql.%d{yyyyMMdd}.log</FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+
+    <appender name="CatAppender" class="com.lianjia.ca.monitor.client.cat.CatLogbackAppender"></appender>
+
+
+    <logger name="java.sql.ResultSet" level="INFO" additivity="true">
+        <appender-ref ref="SQL-FILE"/>
+    </logger>
+    <logger name="java.sql.Statement" level="INFO" additivity="true">
+        <appender-ref ref="SQL-FILE"/>
+    </logger>
+    <logger name="com.alibaba.druid.filter.stat" level="INFO" additivity="true">
+        <appender-ref ref="SQL-FILE"/>
+    </logger>
+
+    <!--<logger name="com.lianjia.home.manage.web.aop.DubboLoggerFilter" level="INFO" additivity="true">-->
+        <!--<appender-ref ref="DUBBO-FILE"/>-->
+    <!--</logger>-->
+
+    <logger name="com.lianjia" level="INFO" additivity="true"></logger>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="ALL-FILE"/>
+        <appender-ref ref="ERROR-FILE"/>
+        <appender-ref ref="CatAppender" />
+    </root>
+</configuration>

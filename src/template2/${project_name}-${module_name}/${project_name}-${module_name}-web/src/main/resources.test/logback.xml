@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%-5p] [%X{SEQ_UUID}] [%c{0}][%M][%L][%t] %m%n
+            </pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+    </appender>
+
+    <appender name="logfile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%-5p] [%X{SEQ_UUID}] [%c{0}][%M][%L][%t] %m%n
+            </pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <File>${MATRIX_APPLOGS_DIR}/manage.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${MATRIX_APPLOGS_DIR}/manage.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="sqlfile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss}] [%-5p] [%X{SEQ_UUID}] [%c{0}][%M][%L][%t] %m%n
+            </pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
+        </encoder>
+        <File>${MATRIX_APPLOGS_DIR}/manage.sql.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>
+                ${MATRIX_APPLOGS_DIR}/manage.sql.%d{yyyy-MM-dd}.log
+            </FileNamePattern>
+            <MaxHistory>30</MaxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!--druid sql-->
+    <logger name="druid.sql.DataSource" level="OFF" additivity="false">
+        <appender-ref ref="sqlfile"/>
+    </logger>
+    <logger name="druid.sql.Connection" level="OFF" additivity="false">
+        <appender-ref ref="sqlfile"/>
+    </logger>
+    <logger name="druid.sql.ResultSet" level="OFF" additivity="false">
+        <appender-ref ref="sqlfile"/>
+    </logger>
+    <logger name="druid.sql.Statement" level="OFF" additivity="false">
+        <appender-ref ref="sqlfile"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="com.alibaba.druid.filter.stat" level="OFF" additivity="false">
+        <appender-ref ref="sqlfile"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="com.lianjia" level="DEBUG" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="logfile"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <appender-ref ref="logfile"/>
+    </root>
+</configuration>
