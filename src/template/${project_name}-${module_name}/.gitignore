@@ -1,0 +1,56 @@
+release.properties
+# excluding gitignore in sub folders
+*/.gitignore
+
+# eclipse setting files
+/.settings
+*/.settings
+.project
+.classpath
+maven-eclipse.xml
+.springBeans
+
+~/.dubbo/**
+
+*.cache
+
+
+# maven target folder
+/target
+*/target
+target/
+
+# idea
+/.idea
+*/.idea
+*.iml
+.DS_Store
+
+#jrebel
+rebel.xml
+.pydevproject
+*.eml
+*/.eml
+out/
+/manage-web/src/main/resources/application-local.yml
+
+logPath_IS_UNDEFINED/
+logPath_IS_UNDEFINED/*
+
+*.bak
+crm-web/MATRIX_APPLOGS_DIR_IS_UNDEFINED/
+/crm-web/MATRIX_APPLOGS_DIR_IS_UNDEFINED/
+/crm-web/MATRIX_APPLOGS_DIR_IS_UNDEFINED/*
+
+*MATRIX_APPLOGS_DIR_IS_UNDEFINED*
+
+*MATRIX_LOGS_DIR*
+
+~
+~/*
+.dubbo/
+.dubbo/*
+
+*.dubbo
+.dubbo
+*.lock
