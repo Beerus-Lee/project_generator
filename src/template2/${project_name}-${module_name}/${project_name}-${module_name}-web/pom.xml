@@ -44,7 +44,10 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
-
+        <dependency>
+            <groupId>com.qyp</groupId>
+            <artifactId>free-config-boot-starter</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.google.guava</groupId>
