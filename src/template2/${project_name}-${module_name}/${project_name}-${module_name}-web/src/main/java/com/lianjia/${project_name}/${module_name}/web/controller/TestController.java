@@ -1,6 +1,6 @@
 package com.lianjia.${project_name}.${module_name}.web.controller;
 
-import com.lianjia.ca.driver.common.JsonResult;
+import com.lianjia.${project_name}.${module_name}.common.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
